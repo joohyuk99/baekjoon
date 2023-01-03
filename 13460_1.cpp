@@ -70,8 +70,39 @@ int main() {
                 int red_j = red.second;
                 int blue_i = blue.first;
                 int blue_j = blue.second;
+
+                if(red_i > blue_i) {
+                    board[red_i][red_j] = '.';
+                    while(board[red_i][red_j] == '.')
+                        red_i--;
+                    
+                    if(board[red_i][red_j] == 'O') {
+                        ans = move < ans ? move : ans;
+                        
+                        while('0' > stack.back() || stack.back() > '9')
+                            stack.pop_back();
+                        stack.pop_back();
+
+                        location_red.pop_back();
+                        location_blue.pop_back();
+
+                        board[location_red.back().first][location_red.back().second] = 'R';
+                        board[location_blue.back().first][location_blue.back().second] = 'B';
+                    }
+
+                    else {
+                        red_i++;
+                        board[red_i][red_j] = 'R';
+
+                        board[blue_i][blue_j] = '.';
+                        while(board[blue_i][blue_j] == '.')
+                            blue_i--;
+
+                        blue_i++;
+                        board[blue_i][blue_j] = 'B';
+                    }
+                }
             }
         }
-
     } while(move != 0);
 }
