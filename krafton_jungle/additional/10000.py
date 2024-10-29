@@ -1,14 +1,17 @@
 import sys
+
 n = int(sys.stdin.readline())
 
-l = []
-for i in range(n):
-    a, b = map(int, sys.stdin.readline())
-    l.append(a - b, i)
-    l.append(a + b, i)
+circles = []
+for _ in range(n):
+    x, r = map(int, sys.stdin.readline().split())
+    circles.append((x - r, r + r)) # left coordinate, dimaster
 
-c = {}
+circles.sort()
+
 cnt = 0
-s = []
-for v in l:
-    if 
+stack = []
+for circle in circles:
+    if stack and stack[0][0] + stack[0][1] <= circle[0]:
+        stack.pop()
+        
